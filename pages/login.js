@@ -1,4 +1,30 @@
+import axios from 'axios';
+import { useState } from 'react';
+
 export default function Home() {
+  const [dataLogin, setDataLogin] = useState({ email: '', password: '' });
+
+  const handleChangeEmail = (e) => {
+    setDataLogin((state) => ({ ...state, email: e.target.value }));
+    console.log(dataLogin);
+  };
+  const handleChangePassword = (e) => {
+    setDataLogin((state) => ({ ...state, password: e.target.value }));
+    console.log(dataLogin);
+  };
+
+  const handleSubmitLogin = (e) => {
+    axios
+      .post(`${process.env.NEXT_APP_BACKEND}/login`, dataLogin)
+      .then((res) => {
+        console.log(res);
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className='bg-white py-6 sm:py-8 lg:py-12'>
       <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
@@ -6,13 +32,17 @@ export default function Home() {
           Login
         </h2>
 
-        <form className='mx-auto max-w-lg rounded-lg border'>
+        <form
+          onSubmit={handleSubmitLogin}
+          className='mx-auto max-w-lg rounded-lg border'
+        >
           <div className='flex flex-col gap-4 p-4 md:p-8'>
             <div>
               <label className='mb-2 inline-block text-sm text-gray-800 sm:text-base'>
                 Email
               </label>
               <input
+                onChange={handleChangeEmail}
                 name='email'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
               />
@@ -23,6 +53,7 @@ export default function Home() {
                 Password
               </label>
               <input
+                onChange={handleChangePassword}
                 name='password'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
               />
