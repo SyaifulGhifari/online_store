@@ -1,4 +1,5 @@
-import Navbar from "../components/Navbar";
+//import Navbar from "../components/Navbar";
+import NavbarUser from "../components/NavbarUser";
 import Dashboard from "./Dashboard";
 
 //export async function getServerSideProps() {}
@@ -6,7 +7,7 @@ import Dashboard from "./Dashboard";
 export default function Home() {
   return (
     <div>
-      <Navbar />
+      <NavbarUser />
       <Dashboard />
     </div>
   );
