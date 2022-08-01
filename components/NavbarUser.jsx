@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GrCart } from "react-icons";
 export default function NavbarUser() {
   return (
     <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-city shadow-lg">
@@ -8,7 +9,7 @@ export default function NavbarUser() {
             Scarva
           </a>
         </div>
-        <div className="ml-auto flex flex-row space-x-4 text-lg font-bold text-black ">
+        <ul className="ml-auto flex flex-row space-x-4 text-lg font-bold text-black ">
           {/* svg profile */}
           <Link href="/">
             <svg width="36" height="30" viewBox="0 0 66 63" fill="none" xmlns="http://www.w3.org/2000/svg" className="cursor-pointer">
@@ -30,7 +31,6 @@ export default function NavbarUser() {
               <path
                 d="M51.6333 31.35C54.2948 31.35 56.637 30.1815 57.8435 28.4145L70.5478 9.918C71.8608 8.037 70.1574 5.7 67.4604 5.7H14.94L11.6042 0H0V5.7H7.09736L19.8726 27.3315L15.0819 34.2855C12.4914 38.1045 15.8981 42.75 21.2921 42.75H63.8763V37.05H21.2921L25.1956 31.35H51.6333ZM18.3112 11.4H61.4277L51.6333 25.65H26.7216L18.3112 11.4ZM21.2921 45.6C17.3885 45.6 14.2302 48.165 14.2302 51.3C14.2302 54.435 17.3885 57 21.2921 57C25.1956 57 28.3895 54.435 28.3895 51.3C28.3895 48.165 25.1956 45.6 21.2921 45.6ZM56.7789 45.6C52.8754 45.6 49.717 48.165 49.717 51.3C49.717 54.435 52.8754 57 56.7789 57C60.6825 57 63.8763 54.435 63.8763 51.3C63.8763 48.165 60.6825 45.6 56.7789 45.6Z"
                 fill="black"
-                className="hover:text-white"
               />
             </svg>
           </Link>
@@ -45,7 +45,7 @@ export default function NavbarUser() {
             </svg>
           </Link>
           {/* svg end logout */}
-        </div>
+        </ul>
       </div>
     </nav>
   );
