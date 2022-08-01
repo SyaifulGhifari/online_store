@@ -59,17 +59,20 @@ export default function Home() {
               />
             </div>
 
-            <button className='block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base'>
+            <button
+              className='block rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition 
+        duration-100 hover:bg-city/75 focus-visible:ring active:bg-city md:text-base'
+            >
               Log in
             </button>
           </div>
 
           <div className='flex items-center justify-center bg-gray-100 p-4'>
             <p className='text-center text-sm text-gray-500'>
-              Don't have an account?
+              Create your Scarva account
               <a
                 href='/register'
-                className='text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700'
+                className='text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 ml-1'
               >
                 Register
               </a>
