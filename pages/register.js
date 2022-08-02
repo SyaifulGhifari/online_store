@@ -1,40 +1,41 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [dataRegister, setDataRegister] = useState({
-    fullName: '',
-    address: '',
-    phoneNumber: '',
+    name: '',
+    phone: '',
     email: '',
     password: '',
   });
-  const handleChangeFullName = (e) => {
-    setDataRegister((state) => ({ ...state, fullName: e.target.value }));
-    console.log(dataRegister);
+
+  const router = useRouter();
+
+  const handleChangeName = (e) => {
+    setDataRegister((state) => ({ ...state, name: e.target.value }));
   };
-  const handleChangeAddress = (e) => {
-    setDataRegister((state) => ({ ...state, address: e.target.value }));
-    console.log(dataRegister);
-  };
-  const handleChangePhoneNumber = (e) => {
-    setDataRegister((state) => ({ ...state, phoneNumber: e.target.value }));
-    console.log(dataRegister);
+  // const handleChangeAddress = (e) => {
+  //   setDataRegister((state) => ({ ...state, address: e.target.value }));
+  // };
+  const handleChangeNumber = (e) => {
+    setDataRegister((state) => ({ ...state, phone: e.target.value }));
   };
   const handleChangeEmail = (e) => {
     setDataRegister((state) => ({ ...state, email: e.target.value }));
-    console.log(dataRegister);
   };
   const handleChangePassword = (e) => {
     setDataRegister((state) => ({ ...state, password: e.target.value }));
-    console.log(dataRegister);
   };
 
   const handleSubmitRegister = (e) => {
+    e.preventDefault();
+    console.log(process.env);
     axios
-      .post(`${process.env.NEXT_APP_BACKEND}/register`, dataRegister)
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, dataRegister)
       .then((res) => {
         console.log(res);
-        navigate('/');
+        router.push('/login');
       })
       .catch((err) => {
         console.log(err);
@@ -58,29 +59,32 @@ export default function Home() {
                 Name
               </label>
               <input
-                onChange={handleChangeFullName}
+                required
+                onChange={handleChangeName}
                 name='text'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
               />
             </div>
 
-            <div>
+            {/* <div>
               <label className='mb-2 inline-block text-sm text-gray-800 sm:text-base'>
                 Address
               </label>
               <input
+                required
                 onChange={handleChangeAddress}
                 name='text'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
               />
-            </div>
+            </div> */}
 
             <div>
               <label className='mb-2 inline-block text-sm text-gray-800 sm:text-base'>
                 Phone Number
               </label>
               <input
-                onChange={handleChangePhoneNumber}
+                required
+                onChange={handleChangeNumber}
                 type='number'
                 name='Number'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
@@ -92,6 +96,7 @@ export default function Home() {
                 Email
               </label>
               <input
+                required
                 onChange={handleChangeEmail}
                 name='email'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
@@ -103,6 +108,8 @@ export default function Home() {
                 Password
               </label>
               <input
+                required
+                type={'password'}
                 onChange={handleChangePassword}
                 name='password'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
@@ -110,6 +117,7 @@ export default function Home() {
             </div>
 
             <button
+              type='submit'
               className='block rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition 
         duration-100 hover:bg-city/75 focus-visible:ring active:bg-city md:text-base'
             >

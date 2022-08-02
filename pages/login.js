@@ -1,24 +1,26 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [dataLogin, setDataLogin] = useState({ email: '', password: '' });
 
+  const router = useRouter();
+
   const handleChangeEmail = (e) => {
     setDataLogin((state) => ({ ...state, email: e.target.value }));
-    console.log(dataLogin);
   };
   const handleChangePassword = (e) => {
     setDataLogin((state) => ({ ...state, password: e.target.value }));
-    console.log(dataLogin);
   };
 
   const handleSubmitLogin = (e) => {
+    e.preventDefault();
     axios
-      .post(`${process.env.NEXT_APP_BACKEND}/login`, dataLogin)
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, dataLogin)
       .then((res) => {
         console.log(res);
-        navigate('/');
+        router.push('/');
       })
       .catch((err) => {
         console.log(err);
@@ -42,6 +44,7 @@ export default function Home() {
                 Email
               </label>
               <input
+                required
                 onChange={handleChangeEmail}
                 name='email'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
@@ -53,6 +56,8 @@ export default function Home() {
                 Password
               </label>
               <input
+                required
+                type={'password'}
                 onChange={handleChangePassword}
                 name='password'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
@@ -60,6 +65,7 @@ export default function Home() {
             </div>
 
             <button
+              type='submit'
               className='block rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition 
         duration-100 hover:bg-city/75 focus-visible:ring active:bg-city md:text-base'
             >
