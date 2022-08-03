@@ -1,7 +1,5 @@
 import { FiPower } from "react-icons/fi";
-import { MdShoppingCart } from "react-icons/md";
-import { IoIosContact } from "react-icons/io";
-export default function NavbarUser() {
+export default function NavbarAdmin() {
   return (
     <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-city shadow-lg">
       <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
@@ -10,19 +8,19 @@ export default function NavbarUser() {
             Scarva
           </a>
         </div>
-        <ul className="flex text-lg text-black">
-          <li>
+        <ul className="ml-auto flex flex-row space-x-4 text-lg font-bold text-black">
+          <li className="ml-5">
             <a href="#" className="hover:text-white">
-              <IoIosContact className="w-28 h-7" />
+              Add
+            </a>
+          </li>
+          <li className="">
+            <a href="#" className="hover:text-white">
+              History Order
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-white">
-              <MdShoppingCart className="w-28 h-7" />
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:text-white">
+            <a href="/logout" className="hover:text-white">
               <FiPower className="w-28 h-7" />
             </a>
           </li>
