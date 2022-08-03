@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { useSelector } from 'react-redux';
 import NavbarUser from '../components/NavbarUser';
+import Navbar from '../components/Navbar';
 
 export default function Dashboard() {
   const [products, setProducts] = useState([]);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   useEffect(() => {
-    console.log('FETFCHH DATA');
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    console.log('FETFCHH DATA');
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/products`,
@@ -25,10 +25,10 @@ export default function Dashboard() {
           },
         }
       );
-      console.log(response);
       const data = await response.json();
       if (response.status === 200) {
-        console.log('Success:', data);
+        setProducts(data.data);
+        console.log(products);
       } else if (response.status >= 300) {
         throw data.message;
       }
@@ -39,7 +39,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <NavbarUser />
+      {isLogin ? <NavbarUser /> : <Navbar />}
       <div className='bg-white py-6 sm:py-8 lg:py-12'>
         <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
           <div className='mb-10 md:mb-16'>
@@ -58,33 +58,42 @@ export default function Dashboard() {
           {/* colom product */}
           <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {/* product start */}
-            <div>
-              <Link href='#'>
-                <a className='group relative block h-80 overflow-hidden rounded-t-lg bg-gray-100'>
-                  <Image
-                    src='/Nike-shoes.jpg'
-                    width='700'
-                    height='700'
-                    alt='Photo by unsplash'
-                    className='h-full w-full object-cover object-center transition duration-200 group-hover:scale-110'
-                  />
-                </a>
-              </Link>
-              <div className='flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4'>
-                <div className='flex flex-col'>
-                  <Link href='#'>
-                    <a className='font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg'>
-                      Nike Air Force 1 NDESTRUKT
+            {products.map((product) => {
+              return (
+                <div key={product.id}>
+                  <Link href={`/product/${product.id}`}>
+                    <a className='group relative block h-80 overflow-hidden rounded-t-lg bg-gray-100'>
+                      <Image
+                        src={
+                          product.product_image == ''
+                            ? '/bajuputih.jpg'
+                            : product.product_image
+                        }
+                        width='700'
+                        height='700'
+                        alt='Photo by unsplash'
+                        className='h-full w-full object-cover object-center transition duration-200 group-hover:scale-110'
+                      />
                     </a>
                   </Link>
+                  <div className='flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4'>
+                    <div className='flex flex-col'>
+                      <Link href={`/product/${product.id}`}>
+                        <a className='font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg'>
+                          {product.product_name}
+                        </a>
+                      </Link>
+                    </div>
+                    <div className='flex flex-col items-end'>
+                      <span className='font-bold text-black lg:text-lg mt-7'>
+                        ${product.price}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className='flex flex-col items-end'>
-                  <span className='font-bold text-black lg:text-lg mt-7'>
-                    $15.00
-                  </span>
-                </div>
-              </div>
-            </div>
+              );
+            })}
+
             {/* product end */}
           </div>
           {/* end colom product */}

@@ -1,11 +1,44 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import NavbarUser from '../../components/NavbarUser';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
 export default function ProductDetail() {
   const router = useRouter();
-  const { id } = router.query;
-  console.log(router.query);
+  const token = useSelector((state) => state.auth.token);
+
+  const [product, setProduct] = useState();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const { id } = router.query;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/${id}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        setProduct(data.data);
+      } else if (response.status >= 300) {
+        throw data.message;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <>
       <NavbarUser />
@@ -32,7 +65,7 @@ export default function ProductDetail() {
                 {/* name - start */}
                 <div className='mb-2 md:mb-3'>
                   <h2 className='text-2xl font-bold text-gray-800 lg:text-3xl'>
-                    Pullover with pattern
+                    {product?.product_name}
                   </h2>
                 </div>
                 {/* name - end  */}
@@ -54,10 +87,10 @@ export default function ProductDetail() {
                 <div className='mt-20'>
                   <div className='flex items-end gap-2'>
                     <span className='text-xl font-bold text-gray-800 md:text-2xl'>
-                      Stoke:
+                      Stock:
                     </span>
                     <span className='text-xl font-bold text-gray-800 md:text-2xl'>
-                      5
+                      {product?.stock}
                     </span>
                   </div>
                 </div>
@@ -70,7 +103,7 @@ export default function ProductDetail() {
                       Price:
                     </span>
                     <span className='text-xl font-bold text-gray-800 md:text-2xl'>
-                      $15.00
+                      ${product?.price}
                     </span>
                   </div>
                 </div>
@@ -80,25 +113,22 @@ export default function ProductDetail() {
             </div>
             {/* buttons - start */}
             <div className='mt-32 flex justify-between'>
-              <a
-                href='#'
-                className='rounded-lg bg-red-600 px-8 py-3 text-center text-sm font-semibold text-black hover:bg-red-500 focus-visible:ring active:text-gray-700 sm:flex-none md:text-base'
-              >
-                Cancel
-              </a>
+              <Link href='/'>
+                <a className='rounded-lg bg-red-600 px-8 py-3 text-center text-sm font-semibold text-black hover:bg-red-500 focus-visible:ring active:text-gray-700 sm:flex-none md:text-base'>
+                  Cancel
+                </a>
+              </Link>
               <div>
-                <a
-                  href='#'
-                  className='rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-black hover:bg-city/60 focus-visible:ring active:text-gray-700'
-                >
-                  Add to cart
-                </a>
-                <a
-                  href='#'
-                  className='mr-80 rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-black hover:bg-city/60 focus-visible:ring active:text-gray-700'
-                >
-                  Checkout
-                </a>
+                <Link href='#'>
+                  <a className='rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-black hover:bg-city/60 focus-visible:ring active:text-gray-700 mr-8'>
+                    Add to cart
+                  </a>
+                </Link>
+                <Link href='#'>
+                  <a className='mr-80 rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-black hover:bg-city/60 focus-visible:ring active:text-gray-700'>
+                    Checkout
+                  </a>
+                </Link>
               </div>
             </div>
             {/* buttons - end */}

@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '../redux/auth';
+import Swal from 'sweetalert2';
 
 export default function Home() {
   const [dataLogin, setDataLogin] = useState({ email: '', password: '' });
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  if (isLogin) {
+    router.replace('/');
+  }
 
   const handleChangeEmail = (e) => {
     setDataLogin((state) => ({ ...state, email: e.target.value }));
@@ -30,6 +39,14 @@ export default function Home() {
       const data = await response.json();
       if (response.status === 200) {
         console.log('Success:', data);
+        dispatch(setLogin({ role: data.data.role, token: data.data.token }));
+        Swal.fire({
+          title: 'Welcome',
+          html: 'Happy shopping',
+          icon: 'success',
+          timer: 2000,
+          timerProgressBar: true,
+        });
         router.push('/');
       } else if (response.status >= 300) {
         throw data.message;
