@@ -1,7 +1,9 @@
 //import Navbar from "../components/Navbar";
 //import Productdetail from "./ProductDetail";
 import NavbarUser from "../components/NavbarUser";
-import Cart from "./Cart";
+import Historyorder from "./Historyorder";
+//import Cart from "./Cart";
+//import Profileuser from "./Profileuser";
 
 //import Dashboard from "./Dashboard";
 
@@ -11,9 +13,11 @@ export default function Home() {
   return (
     <div>
       <NavbarUser />
-      <Cart />
+      {/* <Cart /> */}
       {/* <Dashboard /> */}
       {/* <Productdetail /> */}
+      {/* <Profileuser /> */}
+      <Historyorder />
     </div>
   );
 }
