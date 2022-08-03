@@ -3,7 +3,7 @@
 import NavbarUser from "../components/NavbarUser";
 import Historyorder from "./Historyorder";
 //import Cart from "./Cart";
-//import Profileuser from "./Profileuser";
+import Profileuser from "./Profileuser";
 
 //import Dashboard from "./Dashboard";
 
@@ -16,8 +16,8 @@ export default function Home() {
       {/* <Cart /> */}
       {/* <Dashboard /> */}
       {/* <Productdetail /> */}
-      {/* <Profileuser /> */}
-      <Historyorder />
+      <Profileuser />
+      {/* <Historyorder /> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { AiOutlineUserAdd } from "react-icons/ai";
 export default function Profileuser() {
   return (
     <div className="bg-white py-6 sm:py-8 lg:py-12">
@@ -6,13 +6,7 @@ export default function Profileuser() {
         <div>
           <button className="w-1/4 items-center rounded border border-black">Upload</button>
           <div className="grid gap-8 md:grid-cols-2">
-            {/* images - start */}
-            <div className="grid gap-4 lg:grid-cols-5 mt-5">
-              <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
-                <Image src="/Photo-logo.png" width="300" height="300" alt="Zainal Muatqin" className="w-full object-cover object-center border border-gray-500" />
-              </div>
-            </div>
-            {/* images - end */}
+            <AiOutlineUserAdd className="w-72 h-64 text-center mt-5" />
 
             {/* content - start */}
             <div className="md:py-8">
