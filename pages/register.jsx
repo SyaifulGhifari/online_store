@@ -5,6 +5,7 @@ import Link from 'next/link';
 export default function Home() {
   const [dataRegister, setDataRegister] = useState({
     name: '',
+    address: '',
     phone: '',
     email: '',
     password: '',
@@ -15,9 +16,9 @@ export default function Home() {
   const handleChangeName = (e) => {
     setDataRegister((state) => ({ ...state, name: e.target.value }));
   };
-  // const handleChangeAddress = (e) => {
-  //   setDataRegister((state) => ({ ...state, address: e.target.value }));
-  // };
+  const handleChangeAddress = (e) => {
+    setDataRegister((state) => ({ ...state, address: e.target.value }));
+  };
   const handleChangeNumber = (e) => {
     setDataRegister((state) => ({ ...state, phone: e.target.value }));
   };
@@ -32,7 +33,7 @@ export default function Home() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/register`,
         {
           method: 'POST',
           headers: {
@@ -77,7 +78,7 @@ export default function Home() {
               />
             </div>
 
-            {/* <div>
+            <div>
               <label className='mb-2 inline-block text-sm text-gray-800 sm:text-base'>
                 Address
               </label>
@@ -87,7 +88,7 @@ export default function Home() {
                 name='text'
                 className='w-full rounded border border-slate-400 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring'
               />
-            </div> */}
+            </div>
 
             <div>
               <label className='mb-2 inline-block text-sm text-gray-800 sm:text-base'>
