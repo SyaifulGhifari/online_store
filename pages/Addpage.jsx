@@ -30,12 +30,11 @@ export default function Addpage() {
                 <input type="number" className="form-input h-8 w-1/2 rounded" placeholder="Stock" />
               </div>
             </form>
-
             {/* content - end */}
           </div>
           {/* buttons - start */}
           <div className="mt-3 ml-32 items-center">
-            <button className="ml-96 rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-black hover:bg-city/60 focus-visible:ring active:text-gray-700">Save</button>
+            <button className="ml-96 m-5 rounded-lg bg-city px-8 py-3 text-center text-sm font-semibold text-black hover:bg-city/60 focus-visible:ring active:text-gray-700">Save</button>
             <button className="mr-96 rounded-lg bg-white border border-gray-400 px-8 py-3 text-center text-sm font-semibold text-black hover:bg-gray-400 focus-visible:ring active:text-gray-700">Cancel</button>
           </div>
           {/*buttons - end*/}
