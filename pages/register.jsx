@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Home() {
   const [dataRegister, setDataRegister] = useState({
@@ -28,18 +28,29 @@ export default function Home() {
     setDataRegister((state) => ({ ...state, password: e.target.value }));
   };
 
-  const handleSubmitRegister = (e) => {
+  const handleSubmitRegister = async (e) => {
     e.preventDefault();
-    console.log(process.env);
-    axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, dataRegister)
-      .then((res) => {
-        console.log(res);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataRegister),
+        }
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        console.log('Success:', data);
         router.push('/login');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      } else if (response.status >= 300) {
+        throw data.message;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -128,12 +139,11 @@ export default function Home() {
           <div className='flex items-center justify-center bg-gray-100 p-4'>
             <p className='text-center text-sm text-gray-500'>
               Already have an account?
-              <a
-                href='/login'
-                className='text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 ml-1'
-              >
-                Login
-              </a>
+              <Link href='/login'>
+                <a className='text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 ml-1'>
+                  Login
+                </a>
+              </Link>
             </p>
           </div>
         </form>
