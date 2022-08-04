@@ -2,7 +2,6 @@ import { FiPower } from 'react-icons/fi';
 import { MdShoppingCart } from 'react-icons/md';
 import { IoIosContact } from 'react-icons/io';
 import Link from 'next/link';
-import { GrCart } from 'react-icons';
 import { useDispatch } from 'react-redux';
 import { setLogout } from '../redux/auth';
 import { useRouter } from 'next/router';

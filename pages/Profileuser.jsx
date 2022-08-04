@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Image from 'next/image';
 import NavbarUser from '../components/NavbarUser';
 import { setLogout } from '../redux/auth';
 import Swal from 'sweetalert2';

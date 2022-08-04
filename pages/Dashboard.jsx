@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import NavbarUser from '../components/NavbarUser';
 import Navbar from '../components/Navbar';
+import NavbarAdmin from '../components/NavbarAdmin';
 
 export default function Dashboard() {
   const [products, setProducts] = useState([]);
   const isLogin = useSelector((state) => state.auth.isLogin);
+  const role = useSelector((state) => state.auth.role);
 
   useEffect(() => {
     fetchData();
@@ -39,7 +40,8 @@ export default function Dashboard() {
 
   return (
     <>
-      {isLogin ? <NavbarUser /> : <Navbar />}
+      {isLogin ? role == 'user' ? <NavbarUser /> : <NavbarAdmin /> : <Navbar />}
+
       <div className='bg-white py-6 sm:py-8 lg:py-12'>
         <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
           <div className='mb-10 md:mb-16'>
