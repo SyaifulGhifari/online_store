@@ -49,7 +49,7 @@ export default function ProductDetail() {
               <div className='grid gap-4 lg:grid-cols-5'>
                 <div className='relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4'>
                   <img
-                    src='/bajuputih.jpg'
+                    src={product?.product_image}
                     width='500'
                     height='500'
                     alt='Photo by Himanshu Dewangan'
