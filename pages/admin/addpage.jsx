@@ -1,15 +1,16 @@
 import { AiFillFolderAdd } from "react-icons/ai";
+import Image from "next/image";
 export default function Addpage() {
   return (
     <div className="bg-white py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
         <div className="">
-          <button className="w-1/4 items-center rounded border border-black">Upload</button>
+          <input type="file" className="w-1/4 items-center rounded border border-black"></input>
           <div className="grid gap-8 md:grid-cols-2">
             {/* images - start  */}
             <div className="grid w-80">
               <div className="rounded-lg bg-gray-100 lg:col-span-4">
-                <AiFillFolderAdd className="w-80 h-80" />
+                <Image src="/Nike-shoes.jpg" width="700" height="700" alt="Photo by unsplash" className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
               </div>
             </div>
             {/* images - end */}
