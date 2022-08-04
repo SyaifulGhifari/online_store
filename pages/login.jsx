@@ -1,11 +1,20 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '../redux/auth';
+import Swal from 'sweetalert2';
 
 export default function Home() {
   const [dataLogin, setDataLogin] = useState({ email: '', password: '' });
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  if (isLogin) {
+    router.replace('/');
+  }
 
   const handleChangeEmail = (e) => {
     setDataLogin((state) => ({ ...state, email: e.target.value }));
@@ -14,17 +23,43 @@ export default function Home() {
     setDataLogin((state) => ({ ...state, password: e.target.value }));
   };
 
-  const handleSubmitLogin = (e) => {
+  const handleSubmitLogin = async (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, dataLogin)
-      .then((res) => {
-        console.log(res);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataLogin),
+        }
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        console.log('Success:', data);
+        dispatch(
+          setLogin({
+            role: data.data.role,
+            token: data.data.token,
+            id: data.data.id,
+          })
+        );
+        Swal.fire({
+          title: 'Welcome',
+          html: 'Happy shopping',
+          icon: 'success',
+          timer: 2000,
+          timerProgressBar: true,
+        });
         router.push('/');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      } else if (response.status >= 300) {
+        throw data.message;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -76,12 +111,11 @@ export default function Home() {
           <div className='flex items-center justify-center bg-gray-100 p-4'>
             <p className='text-center text-sm text-gray-500'>
               Create your Scarva account
-              <a
-                href='/register'
-                className='text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 ml-1'
-              >
-                Register
-              </a>
+              <Link href='/register'>
+                <a className='text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 ml-1'>
+                  Register
+                </a>
+              </Link>
             </p>
           </div>
         </form>
