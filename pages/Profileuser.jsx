@@ -142,12 +142,12 @@ export default function Profileuser() {
               className='w-1/4 items-center rounded border border-black'
             />
             <div className='grid gap-8 md:grid-cols-2'>
-              <Image
-                src='/bajuputih.jpg'
+              <img
+                src='/profile_pic.jpg'
                 width='200'
                 height='500'
-                alt='Photo by Himanshu Dewangan'
-                className='w-1/2 object-cover'
+                alt={dataUser.Name}
+                className='w-3/4 object-cover'
               />
 
               {/* content - start */}

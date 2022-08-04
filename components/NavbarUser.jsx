@@ -1,6 +1,6 @@
-import { FiPower } from "react-icons/fi";
-import { MdShoppingCart } from "react-icons/md";
-import { IoIosContact } from "react-icons/io";
+import { FiPower } from 'react-icons/fi';
+import { MdShoppingCart } from 'react-icons/md';
+import { IoIosContact } from 'react-icons/io';
 import Link from 'next/link';
 import { GrCart } from 'react-icons';
 import { useDispatch } from 'react-redux';
@@ -25,21 +25,26 @@ export default function NavbarUser() {
             </a>
           </Link>
         </div>
-        <ul className="flex text-lg text-black">
+        <ul className='flex text-lg text-black'>
           <li>
-            <a href="#" className="hover:text-white">
-              <IoIosContact className="w-28 h-7" />
-            </a>
+            <Link href='/profileuser'>
+              <a href='#' className='hover:text-white'>
+                <IoIosContact className='w-28 h-7' />
+              </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="hover:text-white">
-              <MdShoppingCart className="w-28 h-7" />
-            </a>
+            <Link href='/cart'>
+              <a className='hover:text-white'>
+                <MdShoppingCart className='w-28 h-7' />
+              </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="hover:text-white">
-              <FiPower className="w-28 h-7" />
-            </a>
+            <FiPower
+              className='w-28 h-7 hover:text-white'
+              onClick={handleLogout}
+            />
           </li>
         </ul>
       </div>

@@ -63,15 +63,13 @@ export default function Dashboard() {
                 <div key={product.id}>
                   <Link href={`/product/${product.id}`}>
                     <a className='group relative block h-80 overflow-hidden rounded-t-lg bg-gray-100'>
-                      <Image
+                      <img
                         src={
                           product.product_image == ''
                             ? '/bajuputih.jpg'
                             : product.product_image
                         }
-                        width='700'
-                        height='700'
-                        alt='Photo by unsplash'
+                        alt={product.product_name}
                         className='h-full w-full object-cover object-center transition duration-200 group-hover:scale-110'
                       />
                     </a>
