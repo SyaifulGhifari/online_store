@@ -39,7 +39,13 @@ export default function Home() {
       const data = await response.json();
       if (response.status === 200) {
         console.log('Success:', data);
-        dispatch(setLogin({ role: data.data.role, token: data.data.token }));
+        dispatch(
+          setLogin({
+            role: data.data.role,
+            token: data.data.token,
+            id: data.data.id,
+          })
+        );
         Swal.fire({
           title: 'Welcome',
           html: 'Happy shopping',
