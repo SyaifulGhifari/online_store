@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import NavbarAdmin from '../../components/NavbarAdmin';
+import NavbarAdmin from '../../components/navbaradmin';
 export default function Editpage() {
   return (
     <>

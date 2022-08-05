@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import NavbarUser from '../../components/NavbarUser';
+import NavbarUser from '../../components/navbaruser';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
