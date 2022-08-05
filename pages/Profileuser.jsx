@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -150,12 +151,12 @@ export default function Profileuser() {
               />
             </form>
             <div className='grid gap-8 md:grid-cols-2'>
-              <img
-                src={previewImg}
-                width='500'
-                height='500'
+              <Image
+                src={previewImg || '/profile_pic.jpg'}
+                width='700'
+                height='700'
                 alt={dataUser.Name}
-                className='w-2/4 object-cover'
+                className='w-3/4 object-cover'
               />
 
               {/* content - start */}

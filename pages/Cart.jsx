@@ -1,6 +1,7 @@
 import NavbarUser from '../components/navbaruser';
 import NavbarAdmin from '../components/navbaradmin';
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 
 export default function Cart() {
   const isLogin = useSelector((state) => state.auth.isLogin);
@@ -25,7 +26,7 @@ export default function Cart() {
                     href='#'
                     className='group relative block h-40 w-24 overflow-hidden rounded-lg bg-gray-100 sm:h-56 sm:w-40'
                   >
-                    <img
+                    <Image
                       src='/bajuputih.jpg'
                       alt='Photo by Thái An'
                       width='500'

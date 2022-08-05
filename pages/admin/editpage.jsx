@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import NavbarAdmin from '../../components/NavbarAdmin';
 export default function Editpage() {
   return (
@@ -14,7 +15,7 @@ export default function Editpage() {
               {/* images - start */}
               <div className='grid gap-4 lg:grid-cols-5'>
                 <div className='relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4'>
-                  <img
+                  <Image
                     src='/Nike-shoes.jpg'
                     width='300'
                     height='300'
