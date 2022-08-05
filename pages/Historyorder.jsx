@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import NavbarUser from '../components/navbaruser';
 import NavbarAdmin from '../components/navbaradmin';
 import { useSelector } from 'react-redux';
@@ -25,7 +26,7 @@ export default function Historyorder() {
                     href='#'
                     className='group relative block h-40 w-24 overflow-hidden rounded-lg bg-gray-100 sm:h-56 sm:w-40'
                   >
-                    <img
+                    <Image
                       src='/bajuputih.jpg'
                       width='300'
                       height='300'
@@ -85,7 +86,7 @@ export default function Historyorder() {
                   href='#'
                   className='group relative block h-40 w-24 overflow-hidden rounded-lg bg-gray-100 sm:h-56 sm:w-40'
                 >
-                  <img
+                  <Image
                     src='/bajuputih.jpg'
                     width='300'
                     height='300'

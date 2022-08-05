@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-/* eslint-disable @next/next/no-img-element */
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import NavbarUser from '../components/navbaruser';
@@ -52,7 +52,7 @@ export default function Dashboard() {
 
             <p className='mx-auto max-w-screen-md text-center text-gray-500 md:text-lg'>
               Scarva shoe stores have been driving customer excitement since its
-              early beginnings in the 90's. Being the fashion leader in shoes
+              early beginnings in the 90s. Being the fashion leader in shoes
               product assortments have been the love and passion of many shoe
               enthusiasts in USA. Men and Women alike are attracted to novus
               because of its fashion conscious shoe collections at affordable
@@ -68,7 +68,8 @@ export default function Dashboard() {
                 <div key={product.id}>
                   <Link href={`/product/${product.id}`}>
                     <a className='group relative block h-80 overflow-hidden rounded-t-lg bg-gray-100'>
-                      <img
+                      <Image
+                        layout='fill'
                         src={
                           product.product_image == ''
                             ? '/bajuputih.jpg'

@@ -3,6 +3,7 @@ import NavbarAdmin from '../../components/navbaradmin';
 import { useSelector, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function Addpage() {
   const token = useSelector((state) => state.auth.token);
@@ -91,7 +92,7 @@ export default function Addpage() {
             <div className='grid w-80'>
               <div className='rounded-lg bg-gray-100 lg:col-span-4'>
                 {previewImg && (
-                  <img
+                  <Image
                     src={previewImg}
                     width='700'
                     height='700'

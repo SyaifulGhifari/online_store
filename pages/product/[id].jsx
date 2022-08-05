@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import NavbarUser from '../../components/NavbarUser';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
@@ -48,7 +49,7 @@ export default function ProductDetail() {
               {/* images - start  */}
               <div className='grid gap-4 lg:grid-cols-5'>
                 <div className='relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4'>
-                  <img
+                  <Image
                     src={product?.product_image}
                     width='500'
                     height='500'
