@@ -1,13 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
-import NavbarUser from "../components/navbarUser";
-import { setLogout } from "../redux/auth";
-import Swal from "sweetalert2";
+
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import NavbarUser from '../components/NavbarUser';
+import { setLogout } from '../redux/auth';
+import Swal from 'sweetalert2';
 
 export default function Profileuser() {
+  const [previewImg, setPreviewImg] = useState();
   const [dataUser, setDataUser] = useState({
     Name: "",
     Address: "",
@@ -24,6 +25,11 @@ export default function Profileuser() {
   if (isLogin === "") {
     router.replace("/");
   }
+
+  const handleChangeImg = (e) => {
+    const objectUrl = URL.createObjectURL(e.target.files[0]);
+    setPreviewImg(objectUrl);
+  };
 
   const handleChangeName = (e) => {
     setDataUser((state) => ({ ...state, Name: e.target.value }));
@@ -128,24 +134,56 @@ export default function Profileuser() {
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <div>
-            <input type="file" className="w-1/4 items-center rounded border border-black" />
-            <div className="grid gap-8 md:grid-cols-2">
-              <Image src="/bajuputih.jpg" width="200" height="500" alt="Photo by Himanshu Dewangan" className="w-1/2 object-cover" />
+
+            <form>
+              <input
+                onChange={handleChangeImg}
+                type='file'
+                className='w-1/4 items-center rounded border border-black'
+              />
+            </form>
+            <div className='grid gap-8 md:grid-cols-2'>
+              <img
+                src={previewImg}
+                width='500'
+                height='500'
+                alt={dataUser.Name}
+                className='w-2/4 object-cover'
+              />
 
               {/* content - start */}
-              <div className="md:py-8">
-                <form onSubmit={handleSubmitSave} className=" flex flex-col">
-                  <div className="mb-4">
-                    <label className="mb-1 block">Name:</label>
-                    <input onChange={handleChangeName} value={dataUser.Name} type="text" className="form-input h-8 w-1/2 rounded border border-gray-400 " placeholder="Name" />
+              <div className='md:py-8'>
+                <form onSubmit={handleSubmitSave} className=' flex flex-col'>
+                  <div className='mb-4'>
+                    <label className='mb-1 block'>Name:</label>
+                    <input
+                      onChange={handleChangeName}
+                      value={dataUser.Name}
+                      type='text'
+                      className='form-input h-8 w-1/2 rounded border border-gray-400 pl-2'
+                      placeholder='Name'
+                    />
                   </div>
-                  <div className="mb-4">
-                    <label className="mb-1 block">Address:</label>
-                    <input onChange={handleChangeAddress} value={dataUser.Address} type="text" className="form-input h-8 w-1/2 rounded border border-gray-400" placeholder="Address" />
+                  <div className='mb-4'>
+                    <label className='mb-1 block'>Address:</label>
+                    <input
+                      onChange={handleChangeAddress}
+                      value={dataUser.Address}
+                      type='text'
+                      className='form-input h-8 w-1/2 rounded border border-gray-400 pl-2'
+                      placeholder='Address'
+                    />
                   </div>
-                  <div className="mb-4">
-                    <label className="mb-1 block">Phone:</label>
-                    <input onChange={handleChangeNumber} value={dataUser.Phone} type="number" className="form-input h-8 w-1/2 rounded border border-gray-400" placeholder="Phone" />
+                  <div className='mb-4'>
+                    <label className='mb-1 block'>Phone:</label>
+                    <input
+                      onChange={handleChangeNumber}
+                      value={dataUser.Phone}
+                      type='number'
+                      className='form-input h-8 w-1/2 rounded border border-gray-400 pl-2'
+                      placeholder='Phone'
+                    />
+
                   </div>
                   <div className="mt-16">
                     <button type="submit" className="rounded-lg bg-city px-5 py-3 text-center text-sm font-semibold text-black hover:bg-city/60 focus-visible:ring active:text-gray-700">

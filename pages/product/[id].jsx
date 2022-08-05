@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import NavbarUser from '../../components/NavbarUser';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
@@ -49,8 +48,8 @@ export default function ProductDetail() {
               {/* images - start  */}
               <div className='grid gap-4 lg:grid-cols-5'>
                 <div className='relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4'>
-                  <Image
-                    src='/bajuputih.jpg'
+                  <img
+                    src={product?.product_image}
                     width='500'
                     height='500'
                     alt='Photo by Himanshu Dewangan'
