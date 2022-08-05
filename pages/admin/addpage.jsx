@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NavbarAdmin from '../../components/NavbarAdmin';
+import NavbarAdmin from '../../components/navbaradmin';
 import { useSelector, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
@@ -34,6 +34,11 @@ export default function Addpage() {
   };
   const handleChangePrice = (e) => {
     setDataProduct((state) => ({ ...state, price: e.target.value }));
+  };
+  const handelCancel = () => {
+    setDataProduct({ product_name: '', stock: '', price: '' });
+    setPreviewImg(null);
+    setImageFile(null);
   };
 
   const handleSubmitAdd = async (e) => {
@@ -85,13 +90,15 @@ export default function Addpage() {
             {/* images - start  */}
             <div className='grid w-80'>
               <div className='rounded-lg bg-gray-100 lg:col-span-4'>
-                <img
-                  src={previewImg}
-                  width='700'
-                  height='700'
-                  alt='Photo product'
-                  className='h-full w-full object-cover object-center transition duration-200 group-hover:scale-110'
-                />
+                {previewImg && (
+                  <img
+                    src={previewImg}
+                    width='700'
+                    height='700'
+                    alt='Photo product'
+                    className='h-full w-full object-cover object-center transition duration-200 group-hover:scale-110'
+                  />
+                )}
               </div>
             </div>
             <form onSubmit={handleSubmitAdd}>
@@ -99,6 +106,7 @@ export default function Addpage() {
                 <label className='mb-1 block'>Name:</label>
                 <input
                   onChange={handleChangeName}
+                  value={dataProduct.product_name}
                   type='text'
                   className='form-input h-8 w-1/2 rounded  border border-gray-400 pl-2 '
                   placeholder='Name Product'
@@ -108,6 +116,7 @@ export default function Addpage() {
                 <label className='mb-1 block'>Price:</label>
                 <input
                   onChange={handleChangePrice}
+                  value={dataProduct.price}
                   type='number'
                   className='form-input h-8 w-1/2 rounded  border border-gray-400 pl-2'
                   placeholder='Price'
@@ -117,6 +126,7 @@ export default function Addpage() {
                 <label className='mb-1 block'>Stock:</label>
                 <input
                   onChange={handleChangeStock}
+                  value={dataProduct.stock}
                   type='number'
                   className='form-input h-8 w-1/2 rounded  border border-gray-400 pl-2'
                   placeholder='Stock'
@@ -129,7 +139,11 @@ export default function Addpage() {
                 >
                   Add
                 </button>
-                <button className='mr-50 rounded-lg bg-gray-500 border border-gray-300 px-8 py-3 text-center text-sm font-semibold text-black hover:bg-gray-400 focus-visible:ring active:text-gray-700'>
+                <button
+                  type='button'
+                  onClick={handelCancel}
+                  className='mr-50 rounded-lg bg-gray-500 border border-gray-300 px-8 py-3 text-center text-sm font-semibold text-black hover:bg-gray-400 focus-visible:ring active:text-gray-700'
+                >
                   Cancel
                 </button>
               </div>
