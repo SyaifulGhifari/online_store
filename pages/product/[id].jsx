@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import NavbarUser from '../../components/navbaruser';
+import Navbar from '../../components/navbar';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
@@ -8,6 +9,7 @@ import { useState, useEffect } from 'react';
 export default function ProductDetail() {
   const router = useRouter();
   const token = useSelector((state) => state.auth.token);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const [product, setProduct] = useState();
 
@@ -41,7 +43,7 @@ export default function ProductDetail() {
 
   return (
     <>
-      <NavbarUser />
+      {isLogin ? <NavbarUser /> : <Navbar />}
       <div className='bg-white py-6 sm:py-8 lg:py-12'>
         <div className='mx-auto max-w-screen-xl px-4 md:px-8'>
           <div>
