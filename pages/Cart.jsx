@@ -1,5 +1,5 @@
-import NavbarUser from '../components/NavbarUser';
-import NavbarAdmin from '../components/NavbarAdmin';
+import NavbarUser from '../components/navbaruser';
+import NavbarAdmin from '../components/navbaradmin';
 import { useSelector } from 'react-redux';
 
 export default function Cart() {
