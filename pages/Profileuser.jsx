@@ -7,6 +7,7 @@ import { setLogout } from '../redux/auth';
 import Swal from 'sweetalert2';
 
 export default function Profileuser() {
+  const [previewImg, setPreviewImg] = useState();
   const [dataUser, setDataUser] = useState({
     Name: '',
     Address: '',
@@ -23,6 +24,11 @@ export default function Profileuser() {
   if (isLogin === '') {
     router.replace('/');
   }
+
+  const handleChangeImg = (e) => {
+    const objectUrl = URL.createObjectURL(e.target.files[0]);
+    setPreviewImg(objectUrl);
+  };
 
   const handleChangeName = (e) => {
     setDataUser((state) => ({ ...state, Name: e.target.value }));
@@ -136,17 +142,20 @@ export default function Profileuser() {
       <div className='bg-white py-6 sm:py-8 lg:py-12'>
         <div className='mx-auto max-w-screen-xl px-4 md:px-8'>
           <div>
-            <input
-              type='file'
-              className='w-1/4 items-center rounded border border-black'
-            />
+            <form>
+              <input
+                onChange={handleChangeImg}
+                type='file'
+                className='w-1/4 items-center rounded border border-black'
+              />
+            </form>
             <div className='grid gap-8 md:grid-cols-2'>
               <img
-                src='/profile_pic.jpg'
-                width='200'
+                src={previewImg}
+                width='500'
                 height='500'
                 alt={dataUser.Name}
-                className='w-3/4 object-cover'
+                className='w-2/4 object-cover'
               />
 
               {/* content - start */}
@@ -158,7 +167,7 @@ export default function Profileuser() {
                       onChange={handleChangeName}
                       value={dataUser.Name}
                       type='text'
-                      className='form-input h-8 w-1/2 rounded border border-gray-400 '
+                      className='form-input h-8 w-1/2 rounded border border-gray-400 pl-2'
                       placeholder='Name'
                     />
                   </div>
@@ -168,7 +177,7 @@ export default function Profileuser() {
                       onChange={handleChangeAddress}
                       value={dataUser.Address}
                       type='text'
-                      className='form-input h-8 w-1/2 rounded border border-gray-400'
+                      className='form-input h-8 w-1/2 rounded border border-gray-400 pl-2'
                       placeholder='Address'
                     />
                   </div>
@@ -178,7 +187,7 @@ export default function Profileuser() {
                       onChange={handleChangeNumber}
                       value={dataUser.Phone}
                       type='number'
-                      className='form-input h-8 w-1/2 rounded border border-gray-400'
+                      className='form-input h-8 w-1/2 rounded border border-gray-400 pl-2'
                       placeholder='Phone'
                     />
                   </div>
